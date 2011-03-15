@@ -4,6 +4,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render_to_response
 
 from models import FeedForm, Feed, RssStory
+import pull
 
 def edit_feed(request, feed_id):
     '''
@@ -53,6 +54,9 @@ def show_feeds(request):
     '''
     Show existing feeds (with 'edit' button for each feed)
     '''
+    if request.method == 'POST':
+        if request.POST['update']:
+            pull.update_stories()
     feeds = Feed.objects.all()
     context = {'feeds': feeds}
     return render_to_response('rss/show_feeds.html', context, RequestContext(request))
