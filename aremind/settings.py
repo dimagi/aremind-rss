@@ -54,6 +54,8 @@ INSTALLED_APPS = [
     # common dependencies (which don't clutter up the ui).
     "rapidsms.contrib.handlers",
     "rapidsms.contrib.ajax",
+	
+	"aremind.apps.rss",
 
     # enable the django admin using a little shim app (which includes
     # the required urlpatterns), and a bunch of undocumented apps that
@@ -81,6 +83,7 @@ INSTALLED_APPS = [
 # tabbed navigation. when adding an app to INSTALLED_APPS, you may wish
 # to add it here, also, to expose it in the rapidsms ui.
 RAPIDSMS_TABS = [
+    ("aremind.apps.rss.views.show_feeds",                   "RSS Feeds"),
     ("rapidsms.contrib.messagelog.views.message_log",       "Message Log"),
     ("rapidsms.contrib.registration.views.registration",    "Registration"),
     ("rapidsms.contrib.messaging.views.messaging",          "Messaging"),
@@ -93,6 +96,13 @@ RAPIDSMS_TABS = [
 # -------------------------------------------------------------------- #
 #                         BORING CONFIGURATION                         #
 # -------------------------------------------------------------------- #
+
+
+# Specify a logo URL for the dashboard layout.html. This logo will show up
+# at top left for every tab
+LOGO_LEFT_URL = '/static/rss/images/logo-left.png'
+LOGO_RIGHT_URL = '/static/rss/images/blank.png'
+
 
 
 # debug mode is turned on as default, since rapidsms is under heavy
@@ -139,6 +149,10 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     "django.core.context_processors.i18n",
     "django.core.context_processors.media",
     "django.core.context_processors.request",
+
+    #this is for a custom logo on the dashboard (see LOGO_*_URL in settings, above)
+    "rapidsms.context_processors.logo",
+    
 ]
 
 # template loaders load templates from various places.
