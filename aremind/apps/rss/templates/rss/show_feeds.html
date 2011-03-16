@@ -1,10 +1,37 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-    <title></title>
-</head>
-<body>
+{% extends "layout.html" %}
 
-</body>
-</html>
+{% block title %}RSS Feeds{% endblock %}
+
+{% block content %}
+    <table>
+        <thead>
+            <td>Date</td>
+            <td>URL</td>
+            <td>Description</td>
+            <td>Edit Feed</td>
+            <td>Delete Feed</td>
+        </thead>
+
+        {% for f in feeds %}
+        <tbody>
+            <tr>
+                <td>{{ f.date_added }}</td>
+                <td>{{ f.feed_url }}</td>
+                <td>{{ f.description }}</td>
+                <td><a href="../editfeed/{{ f.id }}">Edit</a></td>
+                <td><a href="?delete_id={{ f.id }}">Delete Feed</a></td>
+            </tr>
+        </tbody>
+        {% endfor %}
+        <tfoot>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            <tr>
+    </table>
+    <a href="../newfeed/">Add a new Feed</a>
+
+
+{% endblock %}
