@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     "rapidsms.contrib.ajax",
 	
 	"aremind.apps.rss",
+    "south",
 
     # enable the django admin using a little shim app (which includes
     # the required urlpatterns), and a bunch of undocumented apps that

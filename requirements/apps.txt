@@ -1,0 +1,4 @@
+django==1.2.4
+South==0.7.3
+-e git+http://github.com/caktus/rapidsms-twilio.git#egg=rtwilio
+psycopg2==2.4
