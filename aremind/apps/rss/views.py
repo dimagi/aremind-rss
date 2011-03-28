@@ -52,17 +52,31 @@ def show_current_stories(request):
     context = {'stories': stories}
     return render_to_response('rss/current_stories.html', context, RequestContext(request))
 
+def show_story(request, feed_id):
+    pass
+
 def show_feeds(request):
     '''
     Show existing feeds (with 'edit' button for each feed)
+    and each associated current story (with 'refresh' button)
     '''
     context = {}
     if request.method == 'POST':
         if request.POST['update']:
             pull.update_stories()
 
+    #this could probably be ajaxified in the future...
+    if request.GET.__contains__('refresh_id'):
+        try:
+            feed = Feed.objects.get(pk=request.GET['refresh_id'])
+            pull.generate_new_story(feed)
+            messages.info(request, 'Updated Feed %s' % feed)
+        except ObjectDoesNotExist:
+            messages.error(request, 'Could not find an object with that ID! Nothing to update')
+            #Actualy story refresh errors (from pull.py) fail silently for now.
+        except AttributeError:
+            messages.error(request, 'Could not update feed "%s".  Problem downloading feed.' % feed )
     if request.GET.__contains__('delete_id'):
-
         try:
             f = Feed.objects.get(pk=request.GET['delete_id'])
             f.delete()
@@ -71,9 +85,19 @@ def show_feeds(request):
             messages.error(request,'Could not find an object with that ID! Nothing to delete.')
 
     feeds = Feed.objects.all()
-    context['feeds']= feeds
-    return render_to_response('rss/show_feeds.html', context, RequestContext(request))
+
+    context['feeds_with_stories']= make_feedstory_dict(feeds)
+    for k in make_feedstory_dict(feeds):
+        print k
     
+    return render_to_response('rss/show_feeds.html', context, RequestContext(request))
+
+
+def make_feedstory_dict(feeds):
+    d = {}
+    for feed in feeds:
+        d[feed] = feed.current_story.latest(field_name='date_pulled')
+    return d
 
 def dashboard(request):
     '''
