@@ -1,6 +1,7 @@
+*.log.*
 .idea/
 *.py[co]
-
+*.py
 # Packages
 *.egg
 *.egg-info
@@ -11,12 +12,14 @@ parts
 bin
 develop-eggs
 .installed.cfg
-
+.pyc
 # Installer logs
 pip-log.txt
-
+*.log
 # Unit test / coverage reports
 .coverage
 .tox
 
 *.sqlite3
+localsettings.py
+

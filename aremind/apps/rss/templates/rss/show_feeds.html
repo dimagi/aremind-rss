@@ -5,26 +5,35 @@
 {% block content %}
     <table>
         <thead>
-            <td>Date</td>
+            <td>Date Added</td>
             <td>URL</td>
             <td>Description</td>
+            <td>Current Story (Title::Contents)</td>
+            <td>Pull Date</td>
             <td>Edit Feed</td>
             <td>Delete Feed</td>
+            <td>Refresh Feed</td>
         </thead>
 
-        {% for f in feeds %}
+        {% for feed, story in feeds_with_stories.items %}
         <tbody>
             <tr>
-                <td>{{ f.date_added }}</td>
-                <td>{{ f.feed_url }}</td>
-                <td>{{ f.description }}</td>
-                <td><a href="../editfeed/{{ f.id }}">Edit</a></td>
-                <td><a href="?delete_id={{ f.id }}">Delete Feed</a></td>
+                <td>{{ feed.date_added }}</td>
+                <td>{{ feed.feed_url }}</td>
+                <td>{{ feed.description }}</td>
+                <td>{{ story.story_title }}::{{ story.story_contents }}</td>
+                <td>{{ story.date_pulled }}</td>
+                <td><a href="../editfeed/{{ feed.id }}">Edit</a></td>
+                <td><a href="?delete_id={{ feed.id }}">Delete Feed</a></td>
+                <td><a href="?refresh_id={{ feed.id }}">Refresh</a></td>
             </tr>
         </tbody>
         {% endfor %}
         <tfoot>
             <tr>
+                <td></td>
+                <td></td>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
