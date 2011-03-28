@@ -1,9 +1,9 @@
 [submodule "submodules/pygsm"]
 	path = submodules/pygsm
-	url = https://github.com/rapidsms/pygsm.git
+	url = git://github.com/rapidsms/pygsm.git
 [submodule "submodules/rapidsms"]
 	path = submodules/rapidsms
-	url = https://github.com/dimagi/rapidsms.git
+	url = git://github.com/dimagi/rapidsms.git
 [submodule "submodules/rapidsms-twilio"]
 	path = submodules/rapidsms-twilio
-	url = https://github.com/caktus/rapidsms-twilio.git
+	url = git://github.com/caktus/rapidsms-twilio.git
