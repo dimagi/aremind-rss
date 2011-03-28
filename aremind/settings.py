@@ -54,9 +54,12 @@ INSTALLED_APPS = [
     # common dependencies (which don't clutter up the ui).
     "rapidsms.contrib.handlers",
     "rapidsms.contrib.ajax",
-	
+
+    "aremind.apps.groups",
 	"aremind.apps.rss",
     "south",
+    "pagination",
+    "django_sorting",
 
     # enable the django admin using a little shim app (which includes
     # the required urlpatterns), and a bunch of undocumented apps that
@@ -84,6 +87,7 @@ INSTALLED_APPS = [
 # tabbed navigation. when adding an app to INSTALLED_APPS, you may wish
 # to add it here, also, to expose it in the rapidsms ui.
 RAPIDSMS_TABS = [
+#    ("aremind.apps.groups.views.list_groups", "Groups"),    #Doesn't work yet!Not done porting from afrims project.    
     ("aremind.apps.rss.views.show_feeds",                   "RSS Feeds"),
     ("rapidsms.contrib.messagelog.views.message_log",       "Message Log"),
     ("rapidsms.contrib.registration.views.registration",    "Registration"),
@@ -154,6 +158,16 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     #this is for a custom logo on the dashboard (see LOGO_*_URL in settings, above)
     "rapidsms.context_processors.logo",
     
+]
+
+MIDDLEWARE_CLASSES = [
+    'django.middleware.common.CommonMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'pagination.middleware.PaginationMiddleware',
+    'django_sorting.middleware.SortingMiddleware',
 ]
 
 # template loaders load templates from various places.
