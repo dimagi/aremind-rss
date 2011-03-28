@@ -29,7 +29,7 @@ urlpatterns = patterns('',
 
     # Aremind URLs
     (r'^rss/', include('aremind.apps.rss.urls')),
-    (r'^crm/', include('aremind.apps.groups.urls')),
+#    (r'^crm/', include('aremind.apps.groups.urls')),
 )
 
 if settings.DEBUG:
