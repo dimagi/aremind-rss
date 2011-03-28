@@ -7,39 +7,7 @@
 # -------------------------------------------------------------------- #
 
 
-# you should configure your database here before doing any real work.
-# see: http://docs.djangoproject.com/en/dev/ref/settings/#databases
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": "rapidsms.sqlite3",
-    }
-}
 
-
-# the rapidsms backend configuration is designed to resemble django's
-# database configuration, as a nested dict of (name, configuration).
-#
-# the ENGINE option specifies the module of the backend; the most common
-# backend types (for a GSM modem or an SMPP server) are bundled with
-# rapidsms, but you may choose to write your own.
-#
-# all other options are passed to the Backend when it is instantiated,
-# to configure it. see the documentation in those modules for a list of
-# the valid options for each.
-INSTALLED_BACKENDS = {
-    #"att": {
-    #    "ENGINE": "rapidsms.backends.gsm",
-    #    "PORT": "/dev/ttyUSB0"
-    #},
-    #"verizon": {
-    #    "ENGINE": "rapidsms.backends.gsm,
-    #    "PORT": "/dev/ttyUSB1"
-    #},
-    "message_tester": {
-        "ENGINE": "rapidsms.backends.bucket",
-    }
-}
 
 
 # to help you get started quickly, many django/rapidsms apps are enabled
