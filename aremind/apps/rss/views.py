@@ -96,7 +96,14 @@ def show_feeds(request):
 def make_feedstory_dict(feeds):
     d = {}
     for feed in feeds:
-        d[feed] = feed.current_story.latest(field_name='date_pulled')
+        try:
+            d[feed] = feed.current_story.latest(field_name='date_pulled')
+        except ObjectDoesNotExist:
+            pull.generate_new_story(feed)
+            try:
+                d[feed] = feed.current_story.latest(field_name='date_pulled')
+            except ObjectDoesNotExist:
+                d[feed] = {'story_title':"",'story_contents':'No Story yet! Hit Refresh!'}
     return d
 
 def dashboard(request):

@@ -1,1 +1,10 @@
 Initial README file
+
+
+Twilio Number Formatting:
+The destination phone number: Format with a '+' and country code e.g., +16175551212 (E.164 format). Twilio will also accept unformatted US numbers e.g., (415) 555-1212, 415-555-1212.
+
+
+Feed URLs that have worked for me:
+Boston Sports: http://feeds.boston.com/boston/sports/news/
+Somerville Weather: http://www.rssweather.com/zipcode/02143/rss.php

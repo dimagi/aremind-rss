@@ -1,0 +1,35 @@
+from aremind.settings import *
+
+INSTALLED_BACKENDS = {
+    "message_tester": {
+        "ENGINE": "rapidsms.backends.bucket",
+    },
+    "twilio": {
+        "ENGINE": "rtwilio.backend",
+        'host': 'ser.ver.ip.add', 'port': '8081',
+        'config': {'encoding': 'UTF-8',
+                    'account_sid': 'YOUR_SID',
+                    'auth_token': 'YOUR_AUTH_TOKEN',
+                    'number': '(xxx) xxx-xxxx',
+                    },
+        }
+}
+
+# you should configure your database here before doing any real work.
+# see: http://docs.djangoproject.com/en/dev/ref/settings/#databases
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": "rapidsms.sqlite3",
+    }
+}
+
+
+
+DEBUG = True
+
+LOG_LEVEL = "DEBUG"
+LOG_FILE = 'router.log'
+LOG_FORMAT = "%(asctime)s %(levelname)-8s - %(name)-26s %(message)s"
+LOG_SIZE = 33554432 # 2^25
+LOG_BACKUPS = 10 # number of logs to keep

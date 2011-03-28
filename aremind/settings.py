@@ -55,7 +55,7 @@ INSTALLED_APPS = [
     "rapidsms.contrib.handlers",
     "rapidsms.contrib.ajax",
 
-    "aremind.apps.groups",
+#    "aremind.apps.groups",
 	"aremind.apps.rss",
     "south",
     "pagination",

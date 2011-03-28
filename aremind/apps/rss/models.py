@@ -12,6 +12,10 @@ class Feed(models.Model):
     def __unicode__(self):
         return '%s :: %s' % (self.description, self.feed_url)
 
+
+    def get_latest_story(self):
+        return self.current_story.latest(field_name='date_pulled')
+
 class FeedForm(ModelForm):
     class Meta:
         model = Feed
@@ -24,4 +28,4 @@ class RssStory(models.Model):
     feed = models.ForeignKey(Feed, null=False, blank=False, related_name='current_story')
 
     def __unicode__(self):
-        return 'Story Title: %s' % self.story_title
+        return '%s: %s' % (self.story_title, self.story_contents)
