@@ -177,8 +177,30 @@ import os
 import tempfile
 import sys
 
-if 'test' in sys.argv:
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": "rapidsms.sqlite3",
+    }
+}
+
+TESTING_DATABASES= {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",#
+        "NAME": "logistics.sqlite3",
+    }
+}
+
+# import local settings if we find them
+try:
+    from localsettings import *
+except ImportError:
+    pass
+
+if ('test' in sys.argv) and ('sqlite' not in DATABASES['default']['ENGINE']):
+    DATABASES = TESTING_DATABASES
     for db_name in DATABASES:
         DATABASES[db_name]['TEST_NAME'] = os.path.join(
             tempfile.gettempdir(),
             "%s.rapidsms.test.sqlite3" % db_name)
+
